@@ -8,6 +8,8 @@ services:
     image: grafana/loki:main
     ports:
       - "3100:3100"
+    volumes:
+      - ./loki/:/mnt/loki/
     command: -config.file=/etc/loki/local-config.yaml
     networks:
       - loki
