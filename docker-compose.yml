@@ -16,9 +16,9 @@ services:
 
   grafana:
     environment:
-      - GF_AUTH_DISABLE_LOGIN_FORM: "true"
-      - GF_AUTH_DISABLE_LOGIN_FORM: "true"
-      - GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_AUTH_DISABLE_LOGIN_FORM: "true"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
     image: grafana/grafana:main-ubuntu
     ports:
       - "3000:3000"
