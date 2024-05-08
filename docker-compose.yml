@@ -40,14 +40,15 @@ services:
     image: grafana/grafana:latest
     ports:
       - "3000:3000"
+    volumes:
+      - ./grafana/dashboard.yaml:/etc/grafana/provisioning/dashboards/main.yaml
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
     networks:
       - loki
 
   logstash:
-    entrypoint:
-      
     volumes:
-      - - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
     image: docker.elastic.co/logstash/logstash:8.13.3
     ports:
       - "514:514"
