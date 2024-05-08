@@ -47,7 +47,9 @@ services:
       - loki
 
   logstash:
-    image: mylogstash
+    build:
+      context: ./logstash
+      dockerfile: Dockerfile.logstash
     ports:
       - 9600:9600
     networks:
