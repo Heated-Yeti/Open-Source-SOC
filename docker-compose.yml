@@ -47,10 +47,12 @@ services:
       - loki
 
   logstash:
-    build:
-      context: ./logstash
-      dockerfile: Dockerfile.logstash
+    image: grafana/logstash-output-loki:main
+    volumes:
+      - ./logstash/:/home/logstash/
+    command: -f logstash.conf
     ports:
       - 9600:9600
     networks:
+      - loki
       - loki
