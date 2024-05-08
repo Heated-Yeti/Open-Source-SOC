@@ -47,10 +47,8 @@ services:
       - loki
 
   logstash:
-    volumes:
-      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-    image: docker.elastic.co/logstash/logstash:8.13.3
+    image: mylogstash
     ports:
-      - "514:514"
+      - 9600:9600
     networks:
       - loki
