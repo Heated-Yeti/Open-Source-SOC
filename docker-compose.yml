@@ -46,12 +46,22 @@ services:
     networks:
       - loki
 
+  # logstash:
+  #   image: logstash:8.13.4
+  #   entrypoint:
+  #     - /bin/logstash-plugin install logstash-output-loki
+  #   volumes:
+  #     - ./logstash/:/usr/share/logstash/pipeline/
+  #   ports:
+  #     - 5044:5044
+  #     - 9600:9600
+  #   networks:
+  #     - loki
+
   logstash:
-    image: grafana/logstash-output-loki:main
-    volumes:
-      - ./logstash/:/home/logstash/
-    command: -f logstash.conf
-    ports:
+    build: 
+      context: ./logstash
+    ports: 
       - 9600:9600
-    networks:
-      - loki
+    volumes:
+      - ./logstash/pipeline/:/usr/share/logstash/pipeline/
