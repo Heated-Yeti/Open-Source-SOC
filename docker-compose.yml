@@ -2,7 +2,7 @@ version: "3"
 
 networks:
   loki:
-
+    external: true
 services:
   loki:
     image: grafana/loki:main
@@ -54,5 +54,4 @@ services:
     ports:
       - 9600:9600
     networks:
-      - loki
       - loki
