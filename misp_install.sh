@@ -35,9 +35,9 @@ api_key=$(grep "^ADMIN_KEY=" ./.env | cut -d "=" -f 2)
 wget https://raw.githubusercontent.com/MISP/MISP/2.4/app/files/feed-metadata/defaults.json
 
 # adding feeds to misp (defaults.json used with /feeds/importFeeds/ but api present for /feeds/add)
-#json_payload=$(cat defaults.json)
-#response=$(curl -XPOST --insecure --header "Authorization: $api_key" --header "Accept: application/json" --header "Content-Type: application/json" -d "${json_payload}" "https://localhost/feeds/add")
-#echo "Response: $response"
+json_payload=$(cat defaults.json)
+response=$(curl -XPOST --insecure --header "Authorization: $api_key" --header "Accept: application/json" --header "Content-Type: application/json" -d "${json_payload}" "https://localhost/feeds/importFeeds")
+echo "Response: $response"
 
 
 # misp cron job to automatically update feeds daily (to change the period by use crontab)
