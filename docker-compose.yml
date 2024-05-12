@@ -2,7 +2,6 @@ version: "3"
 
 networks:
   loki:
-    external: true
 
 services:
   loki:
