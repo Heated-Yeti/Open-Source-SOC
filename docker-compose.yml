@@ -65,4 +65,4 @@ services:
     ports: 
       - 9600:9600
     volumes:
-      - ./logstash/pipeline/:/usr/share/logstash/pipeline/
+
