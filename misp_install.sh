@@ -4,6 +4,10 @@
 git clone https://github.com/MISP/misp-docker.git
 cd misp-docker
 
+# setting "EjQ7A6GK94a0bCdpLRFq6vgfO3V7MyR5kpNocdXp" as the default auth key in the key
+line_number=$(grep -n '^ADMIN_KEY=' "./template.env" | cut -d':' -f1)
+sed -i "s/\(ADMIN_KEY=\)/\1EjQ7A6GK94a0bCdpLRFq6vgfO3V7MyR5kpNocdXp/" ./template.env
+
 cat << EOF
 
 
@@ -18,11 +22,6 @@ to exit,
 EOF
 sleep 3s
 
-# setting "EjQ7A6GK94a0bCdpLRFq6vgfO3V7MyR5kpNocdXp" as the default auth key in the key
-line_number=$(grep -n '^ADMIN_KEY=' "./template.env" | cut -d':' -f1)
-sed -i "s/\(ADMIN_KEY=\)/\1EjQ7A6GK94a0bCdpLRFq6vgfO3V7MyR5kpNocdXp/" ./template.env
-
-
 nano template.env
 mv template.env .env
 docker compose pull
@@ -33,6 +32,19 @@ api_key=$(grep "^ADMIN_KEY=" ./.env | cut -d "=" -f 2)
 
 # downloading misp feeds list
 wget https://raw.githubusercontent.com/MISP/MISP/2.4/app/files/feed-metadata/defaults.json
+
+# waiting for container to start
+for ((i=15;i>=0;i--)){
+cat << EOF
+===========================================================
+
+Waiting for $i seconds  
+
+===========================================================
+EOF
+sleep 1s
+clear 
+}
 
 # adding feeds to misp (defaults.json used with /feeds/importFeeds/ but api present for /feeds/add)
 json_payload=$(cat defaults.json)
