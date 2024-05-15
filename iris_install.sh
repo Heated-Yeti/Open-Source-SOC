@@ -10,6 +10,9 @@ git checkout v2.4.7
 # Setting admininstrator password
 sed -i "s/#IRIS_ADM_PASSWORD=/IRIS_ADM_PASSWORD=/" ./.env.model
 
+# Changing Iris port to 4433
+sed -i "s/\(INTERFACE_HTTPS_PORT=\)/\14433/" ./.env.model
+
 # Copy the environment file
 cp .env.model .env
 
