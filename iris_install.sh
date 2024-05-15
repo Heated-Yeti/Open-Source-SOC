@@ -11,7 +11,7 @@ git checkout v2.4.7
 sed -i "s/#IRIS_ADM_PASSWORD=/IRIS_ADM_PASSWORD=/" ./.env.model
 
 # Changing Iris port to 4433
-sed -i "s/\(INTERFACE_HTTPS_PORT=\)/\14433/" ./.env.model
+sed -i "s/INTERFACE_HTTPS_PORT=443/INTERFACE_HTTPS_PORT=4433/" ./.env.model
 
 cat << EOF
 
