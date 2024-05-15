@@ -7,6 +7,9 @@ cd misp-docker
 # setting "EjQ7A6GK94a0bCdpLRFq6vgfO3V7MyR5kpNocdXp" as the default auth key in the key
 sed -i "s/\(ADMIN_KEY=\)/\1EjQ7A6GK94a0bCdpLRFq6vgfO3V7MyR5kpNocdXp/" ./template.env
 
+# setting base url of misp to https://localhost:5000
+sed -i "s/\(BASE_URL=\)/\1https://localhost:5000/" ./template.env
+
 cat << EOF
 
 
@@ -22,15 +25,12 @@ EOF
 sleep 3s
 
 nano template.env
-mv template.env .env
+cp template.env .env
 docker compose pull
 
 # changing port 80, 443 to 4999, 5000 respectivly
 sed -i "s/- \"80:80\"/- \"4999:80\"/" docker-compose.yml
 sed -i "s/- \"443:443\"/- \"5000:443\"/" docker-compose.yml
-
-# setting base url of misp to https://localhost:5000
-sed -i "s/\(BASE_URL=\)/\1https://localhost:5000/" ./template.env
 
 docker compose up -d
 
