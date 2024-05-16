@@ -14,6 +14,7 @@ docker compose -f generate-indexer-certs.yml run --rm generator
 # Chaning compose ports and increasing memory
 sed -i 's/443:5601/5500:5601/' docker-compose.yml
 sed -i 's/9200:9200/9201:9200/' docker-compose.yml
+sed -i 's/514:514\/udp/5140:514\/udp/' docker-compose.yml
 sed -i "s/\(\"- OPENSEARCH_JAVA_OPTS=-Xms1g -\)/\1Xmx4g\"/" docker-compose
 
 docker compose up -d
