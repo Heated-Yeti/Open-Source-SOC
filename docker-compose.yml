@@ -46,31 +46,30 @@ services:
     networks:
       - loki
 
-  # logstash:
-  #   image: logstash:8.13.4
-  #   entrypoint: 
-  #     - sh
-  #     - -c
-  #     - "bin/logstash-plugin install logstash-output-loki && logstash -f /usr/share/logstash/pipeline/logstash.conf"
-  #   volumes:
-  #     - ./logstash/pipeline/:/usr/share/logstash/pipeline/
-  #     - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-  #   ports:
-  #     - 5044:5044
-  #     - 9600:9600
-  #     - 514:514/tcp
-  #     - 514:514/udp
-  #   networks:
-  #     - loki
-
   logstash:
-    build: 
-      context: ./logstash
-    ports: 
-      - 9600:9600
+    image: logstash:8.13.4
+    entrypoint:
+      - sh
+      - -c
+      - "bin/logstash-plugin install logstash-output-loki && bin/logstash-plugin install logstash-output-syslog && logstash -f /usr/share/logstash/pipeline/logstash.conf"
+    volumes:
+      - ./logstash/pipeline/:/usr/share/logstash/pipeline/
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+    ports:
       - 5044:5044
       - 9600:9600
       - 514:514/tcp
       - 514:514/udp
-    volumes:
-      - ./logstash/pipeline/:/usr/share/logstash/pipeline/
+    network_mode: "host"
+
+  # logstash:
+  #   build: 
+  #     context: ./logstash
+  #   ports: 
+  #     - 9600:9600
+  #     - 5044:5044
+  #     - 9600:9600
+  #     - 514:514/tcp
+  #     - 514:514/udp
+  #   volumes:
+  #     - ./logstash/pipeline/:/usr/share/logstash/pipeline/

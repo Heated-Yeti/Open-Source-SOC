@@ -8,7 +8,7 @@ cd misp-docker
 sed -i "s/\(ADMIN_KEY=\)/\1EjQ7A6GK94a0bCdpLRFq6vgfO3V7MyR5kpNocdXp/" ./template.env
 
 # setting base url of misp to https://localhost:5000
-sed -i "s/\(BASE_URL=\)/\1https://localhost:5000/" ./template.env
+#sed -i "s/\(BASE_URL=\)/\1https://localhost:5000/" ./template.env
 
 cat << EOF
 
